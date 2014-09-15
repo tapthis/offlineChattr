@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="PrivateChatEntry" representedClassName="PrivateChatEntry" syncable="YES">
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="seen" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="senderName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="messageToChat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PrivateChatSession" inverseName="chatToMessage" inverseEntity="PrivateChatSession" syncable="YES"/>
+    </entity>
+    <entity name="PrivateChatSession" representedClassName="PrivateChatSession" syncable="YES">
+        <attribute name="initiator" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="opponent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sessionID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="chatToMessage" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="PrivateChatEntry" inverseName="messageToChat" inverseEntity="PrivateChatEntry" syncable="YES"/>
+        <relationship name="chatToPrivateKey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PrivateKey" inverseName="privateKeyToChat" inverseEntity="PrivateKey" syncable="YES"/>
+        <relationship name="chatToPublicKey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PublicKey" inverseName="publicKeyToChat" inverseEntity="PublicKey" syncable="YES"/>
+    </entity>
+    <entity name="PrivateKey" representedClassName="PrivateKey" syncable="YES">
+        <attribute name="privateKey" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="sharedSecret" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="privateKeyToChat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PrivateChatSession" inverseName="chatToPrivateKey" inverseEntity="PrivateChatSession" syncable="YES"/>
+    </entity>
+    <entity name="PublicChatEntry" representedClassName="PublicChatEntry" syncable="YES">
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="senderName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="PublicKey" representedClassName="PublicKey" syncable="YES">
+        <attribute name="generator" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="modulo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="publicKey" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="receiverPublicKey" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="publicKeyToChat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PrivateChatSession" inverseName="chatToPublicKey" inverseEntity="PrivateChatSession" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="PrivateChatEntry" positionX="0" positionY="0" width="128" height="118"/>
+        <element name="PrivateChatSession" positionX="0" positionY="0" width="128" height="148"/>
+        <element name="PrivateKey" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="PublicChatEntry" positionX="0" positionY="0" width="128" height="88"/>
+        <element name="PublicKey" positionX="0" positionY="0" width="128" height="120"/>
+    </elements>
+</model>
